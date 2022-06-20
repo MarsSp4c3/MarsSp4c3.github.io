@@ -17,7 +17,7 @@ if (!file_exists($nombre_fichero)) {
 if (filesize($nombre_fichero) == 0){
   $vacio = false;
 }else{
-  $file = fopen($nombre_fichero, "r") || exit("Error abriendo fichero!");
+  $file = fopen($nombre_fichero, "r") || ("Error abriendo fichero!");
   $linea = fgets($file);
   $terminal =  explode("_", $linea);
   $mid = trim($terminal[0]);
@@ -38,15 +38,9 @@ $terminalId=$tid;//BP para OTT
 $_SESSION['merchterm'] = $merchterm;
 
 
-/*
-**Low Risk - DATAFAST*/
-/*if($modalidad=='1'){
-	$_SESSION['entityId'] = "8a8294185a65bf5e015a6c8b89a10d8d";
-	$_SESSION['autorizador'] =  "OGE4Mjk0MTg1YTY1YmY1ZTAxNWE2YzhiMmY2OTBkOGJ8UmtqcHlOTkU4cw==";
-}else{*/
+
 	$_SESSION['entityId'] = "8a8294175f113aad015f11652f2200a5";
 	$_SESSION['autorizador'] =  "OGE4Mjk0MTg1YTY1YmY1ZTAxNWE2YzhjNzI4YzBkOTV8YmZxR3F3UTMyWA==";
-//}
 
 
 function request($items, $total,$iva,$totaTarifa12,$totalBase0,$email, $primer_nombre, $segundo_nombre, $apellido, $cedula, $trx,$ip_address, $finger,$merchterm,
@@ -111,11 +105,11 @@ function request($items, $total,$iva,$totaTarifa12,$totalBase0,$email, $primer_n
 
 $baseUrl = "https://pagostest.datafast.com.ec/df/payment.php";
 
-if(!is_float($totalBaseIva))
-	$totalBaseIva= number_format((float)$totalBaseIva, 2, '.', '');
+if(!is_float($totalBaseIva)){
+	$totalBaseIva= number_format((float)$totalBaseIva, 2, '.', '');}
 
-if(!is_float($totalBase0))
-	$totalBase0 = number_format((float)$totalBase0, 2, '.', '');
+if(!is_float($totalBase0)){
+	$totalBase0 = number_format((float)$totalBase0, 2, '.', '');}
 
 $iva =  $totalBaseIva * 0.12;
 $iva =  round($iva,2);
